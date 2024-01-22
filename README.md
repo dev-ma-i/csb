@@ -1,4 +1,4 @@
-<H1>Cut Screenshot Borders</H1> 
+<H1>Crop Screenshot Borders</H1> 
 
 Prerequisite Python Packages: <b>NumPy, argparse, PIL (Python Imaging Library)</b>
 
@@ -19,7 +19,7 @@ options:
 Sometimes you receive pictures from social media sites that can not be directly saved to your cell-phone. If so, the only way to keep a copy is a screenshot. <BR>
 But usually such an image also contains additional information like: the name of the posting account, an app identification and/or additional text. <BR>
 Stuff you may not want to forward if reposted. <BR>
-Cut-Screenshot-Borders (csb.py) is a python script that will automatically crop the top and bottom borders of a screenshot.
+Crop-Screenshot-Borders (csb.py) is a python script that will automatically cut off the top and bottom borders of a screenshot.
 
 CSD.py will "guess" the background color by analysing the first pixel in the uppel left corner of the specified image. <BR>
 If this is not what you want, you can coose another color by using the "-bg" option followed by a Hex-Sring. E.g. use the string ffffff for "white", 000000 for "black" or ffff00 for "yellow" <BR>
