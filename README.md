@@ -1,6 +1,6 @@
-# Cut Screenshot Borders 
+<H1>Cut Screenshot Borders</H1> 
 
-``
+```
 usage: csb.py [-h] [-v] [-d] [-bg BG] [-V VARIANCE] [pic]
 
 positional arguments:
