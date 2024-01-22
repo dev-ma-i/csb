@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-version_string = "Cut Screenshot Borders (csb.py) ver. 1.0 by may - 22.01.2024"
+version_string = "Crop Screenshot Borders (csb.py) ver. 1.0 by may - 22.01.2024"
 
 from PIL import Image
 import numpy as np
