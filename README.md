@@ -1,5 +1,6 @@
-Cut Screenshot Borders 
+# Cut Screenshot Borders 
 
+``
 usage: csb.py [-h] [-v] [-d] [-bg BG] [-V VARIANCE] [pic]
 
 positional arguments:
@@ -11,7 +12,7 @@ options:
   -d, --debug                         enable debug mode
   -bg BG                              specify a custom background color <hex-string>
   -V VARIANCE, --variance VARIANCE    specify a custom variance <float>
-
+```
 
 Sometimes you receive pictures from social media sites which can't be directly saved to your cell-phone. If so, the only way to keep a copy is a screenshot. 
 But usually such an image also contains additional information like: the name of the posting account, an app identification and/or additional text. 
