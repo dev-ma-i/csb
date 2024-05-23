@@ -1,9 +1,10 @@
 #!/usr/bin/python3
 
-version_string = "Crop Screenshot Borders (csb.py) ver. 1.0 by may - 22.01.2024"
+version_string = "Crop Screenshot Borders (csb.py) ver. 1.1 by may - 23.05.2024"
 
 from PIL import Image
 import numpy as np
+import os
 import sys
 import argparse
 
@@ -12,6 +13,7 @@ pic = ""
 bg = False
 variance = 10.0
 debug = False
+remove = False
 
 ### Array<Int> string2Int(String string) ##############################################################################
 def string2Int(string):
@@ -32,6 +34,7 @@ parser.add_argument("-v", "--version", action="store_true", help="print actual v
 parser.add_argument("-d", "--debug", action="store_true", help="enable debug mode")
 parser.add_argument("-bg", type=str, help="specify a custom background color <hex-string>")
 parser.add_argument("-V", "--variance", type=float, help="specify a custom variance <float>")
+parser.add_argument("-r", "--rm", action="store_true", help="remove original file. What\'s gone is gone !!!")
 parser.add_argument("pic", nargs='?', help="file to process")
 
 args = parser.parse_args()
@@ -41,7 +44,6 @@ if (args.version ):
 
 if (args.debug ):
   debug = True
-  print("Debug enabled")
 
 if (args.bg ):
   bg = args.bg
@@ -51,6 +53,10 @@ if (args.variance ):
   variance = args.variance
   print("Custom Variance: " + str(variance))
 
+if (args.rm ):
+  remove = True
+  print("Original picture will be removed !")
+
 if (args.pic ):
   pic = (args.pic).strip("./")
 else:
@@ -58,7 +64,6 @@ else:
   sys.exit(0)
 
 ### Global Variables ###########################################
-# pic = sys.argv[1]
 im = Image.open(pic)
 imnp = np.array(im)
 bitDepth = len(imnp[0][0])
@@ -72,7 +77,7 @@ l_suffix = len(suffix)+1
 prefix = pic[:(l_prefix-l_suffix)]
 
 if (debug):
-  print("DEBUG !")
+  print("DEBUG:")
   if (bitDepth > 3):
     debug_rgba = [255,0,0,0]
   new_pic = prefix + '_csb_edit_debug.' + suffix
@@ -127,13 +132,15 @@ for l in range(0,vLines):
       line_type = "BG"
 
   if (line_type != ack_type):
-    hit = [ll,l,(l-ll),ack_type]
+    if (debug):
+      hit = [ll,l,(l-ll),ack_type]
+      imnp[l] = debug_vmLine                                    ### insert red-line
+    else:
+      hit = [ll,l,(l-ll)]
+
     hits.append(hit)
     ack_type = line_type
     ll = l
-
-    if (debug):
-      imnp[l] = debug_vmLine 
 
 last_position = hits[-1][1]
 hit = [last_position,vLines,(vLines-last_position),line_type]
@@ -152,7 +159,7 @@ for v in range(len(hits)):
 
 print("Max image block detected between lines: " + str(maxBlock) )
 if (debug):
-  nim = Image.fromarray(imnp, mode=im.mode )
+  nim = Image.fromarray(imnp, mode=im.mode)
   nim.show()
 else:
   nim = Image.fromarray(imnp[(maxBlock[0]+1):(maxBlock[1]-1)], mode=im.mode )
@@ -161,3 +168,6 @@ else:
 ### write new image file ####################################
 
 nim.save(new_pic, quality=95)
+
+if (remove):
+  os.remove(pic)

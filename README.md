@@ -14,6 +14,7 @@ options:
   -d, --debug                         enable debug mode
   -bg BG                              specify a custom background color <hex-string>
   -V VARIANCE, --variance VARIANCE    specify a custom variance <float>
+  -r, --rm                            remove original file. What's gone is gone !!!
 ```
 
 Sometimes you receive pictures from social media sites that can not be directly saved to your cell-phone. If so, the only way to keep a copy is a screenshot. <BR>
@@ -26,7 +27,7 @@ If this is not what you want, you can coose another color by using the "-bg" opt
 CAUTION: Check the bit-depth of the picture. Some use RGB32 instead of RGB24. In this case the background color must be also an 8-char string (instead of 6).
 
 The script will look for the "biggest coherent block of lines" that doesn't correlate to the background color - and then excise it. Depending on the image and the used variance, this may not always work correctly. <BR>
-Using the "debug" option will insert red lines whenever a deviating block gets detected. A debug image will be created where you can see these lines.
+Using the "debug" option will insert red lines whenever a deviating block gets detected. A new debug image will be created where you can see these lines.
 
 CSB will compare the actual line vs a line filled with the background color. If they differ and the variance is greater then the given threshold, a new block gets detected. <BR>
 The "variance" option will let you fine-tune this detection threshold. Default is 10.0 <BR>
